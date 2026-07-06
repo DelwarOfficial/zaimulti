@@ -766,6 +766,14 @@ def warm_account(email: str) -> bool:
 # ------------------------------------------------------------
 
 def main():
+    import sys
+    if sys.platform.startswith("win"):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+            sys.stderr.reconfigure(encoding="utf-8")
+        except AttributeError:
+            pass
+
     import argparse
 
     parser = argparse.ArgumentParser(description="Z.ai Smart Account Router")

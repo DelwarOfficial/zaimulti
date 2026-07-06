@@ -61,7 +61,7 @@ def generate_password() -> str:
 def _detect_slider_or_captcha(page: Page) -> bool:
     """Heuristic detection for common slider / captcha elements."""
     texts = [
-        "slider", "verify", "security check", "drag", "captcha",
+        "slider", "security check", "drag", "captcha",
         "human", "drag the", "slide to", "puzzle",
     ]
     try:
@@ -205,7 +205,19 @@ def _submit_signup_form(page: Page, email: str, password: str) -> None:
     if pw_filled:
         selectors.fill_password_confirm(page, password, timeout=3000)
         console.print("[dim]Password fields filled[/dim]")
-    human_delay(1.0, 2.5)
+    # Wait for captcha/slider verification to be completed if present
+    captcha_btn = page.locator('text="Click to start verification"').first
+    if captcha_btn.count() > 0 and captcha_btn.is_visible():
+        console.print("[bold yellow]!!! Security verification / Captcha detected !!![/bold yellow]")
+        console.print("[yellow]Please solve the verification slider in the browser window now...[/yellow]")
+        # Poll for up to 35 seconds to detect if verification passed
+        for _ in range(35):
+            page.wait_for_timeout(1000)
+            passed = page.locator('text="Verification Passed!", text="Passed"').first
+            if (passed.count() > 0 and passed.is_visible()) or not captcha_btn.is_visible():
+                console.print("[bold green][OK] Verification passed! Submitting form...[/bold green]")
+                human_delay(1.0, 2.0)
+                break
 
     # 4. Submit.
     if not selectors.click_submit(page, timeout=6000):
@@ -285,21 +297,7 @@ def create_zai_account(
             # 2-4. Drive the form.
             _submit_signup_form(page, email, password)
 
-            # 5. Check for immediate Captcha / Security verification after form submit
-            human_delay(2.5, 4.0)
-            if _detect_slider_or_captcha(page) or page.locator('text="Click to start verification"').count() > 0:
-                # If page already navigated to the verification email page, skip captcha warning
-                if page.locator('text="Verify Your Email", text="sent a verification link"').count() == 0:
-                    console.print("[bold yellow]!!! Security verification / Captcha detected !!![/bold yellow]")
-                    console.print("[yellow]Please solve the verification/captcha manually in the browser window now.[/yellow]")
-                    # Play a beep or wait for the user to complete it
-                    _wait_with_fallback(
-                        page,
-                        int(config.get("create_wait_slider_sec", 35)),
-                        "Waiting 35 seconds for manual captcha/verification solve...",
-                    )
-
-            # 6. Wait for the verification link, with provider fallback.
+            # 5. Wait for the verification link, with provider fallback.
             verify_link = _wait_for_verification_with_fallback(
                 page, temp_mail, email, password,
             )
@@ -495,6 +493,14 @@ def _persist_local(
 # ============================================================
 
 if __name__ == "__main__":
+    import sys
+    if sys.platform.startswith("win"):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+            sys.stderr.reconfigure(encoding="utf-8")
+        except AttributeError:
+            pass
+
     console.print("[bold]=== Z.ai Automatic Account Creator ===[/bold]")
     console.print("Multi-provider temp mail + multi-strategy selectors + full automation.")
     console.print("Browser visible only for slider/captcha.\n")

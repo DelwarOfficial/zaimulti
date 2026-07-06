@@ -134,6 +134,14 @@ def cmd_bulk_validate():
     console.print(f"[green]Re-validated pool. Marked {updated} as exhausted/invalid.[/green]")
 
 def main():
+    import sys
+    if sys.platform.startswith("win"):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+            sys.stderr.reconfigure(encoding="utf-8")
+        except AttributeError:
+            pass
+
     parser = argparse.ArgumentParser(
         description="ZRT — Z.ai Red Team Complete Toolkit",
         formatter_class=argparse.RawDescriptionHelpFormatter,

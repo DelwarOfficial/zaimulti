@@ -108,6 +108,8 @@ def _extract_links(body: str) -> List[str]:
     """Return all http(s) links found in a text/html body."""
     if not body:
         return []
+    import html
+    body = html.unescape(body)
     # Catch URLs that may include query params + fragments.
     raw = re.findall(r'https?://[^\s<>"\']+', body)
     return [_normalise_link(l) for l in raw if l]

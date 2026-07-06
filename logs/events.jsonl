@@ -11,3 +11,5 @@
 {"ts": "2026-07-06T11:49:01Z", "level": "INFO", "logger": "zai.router", "msg": "VALIDATED | zai182636@web-library.net", "email": "zai182636@web-library.net", "event": "VALIDATED"}
 {"ts": "2026-07-06T14:14:47Z", "level": "INFO", "logger": "zai.router", "msg": "SELECTED | zai178089@web-library.net | smart rotation (low pressure + usage)", "email": "zai178089@web-library.net", "event": "SELECTED", "reason": "smart rotation (low pressure + usage)"}
 {"ts": "2026-07-06T14:16:14Z", "level": "INFO", "logger": "zai.router", "msg": "VALIDATED | zai178089@web-library.net", "email": "zai178089@web-library.net", "event": "VALIDATED"}
+{"ts": "2026-07-06T15:03:13Z", "level": "INFO", "logger": "zai.router", "msg": "ACCOUNT_CREATED | zai882234@guerrillamailblock.com | proxy=no", "email": "zai882234@guerrillamailblock.com", "event": "ACCOUNT_CREATED", "reason": "proxy=no"}
+{"ts": "2026-07-06T15:13:27Z", "level": "INFO", "logger": "zai.router", "msg": "ACCOUNT_CREATED | zai137246@web-library.net | proxy=no", "email": "zai137246@web-library.net", "event": "ACCOUNT_CREATED", "reason": "proxy=no"}

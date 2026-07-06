@@ -159,10 +159,11 @@ def find_first_visible(
     short per-strategy timeout. Any Playwright error is swallowed so the next
     strategy is attempted.
     """
+    per_sel_timeout = max(350, timeout // max(1, len(selectors)))
     for sel in selectors:
         try:
             loc = page.locator(sel).first
-            loc.wait_for(state="visible", timeout=timeout)
+            loc.wait_for(state="visible", timeout=per_sel_timeout)
             if must_be_enabled:
                 try:
                     if loc.is_disabled() is True:

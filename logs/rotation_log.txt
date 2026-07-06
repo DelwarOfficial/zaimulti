@@ -10,3 +10,5 @@
 [2026-07-06 17:49:01] VALIDATED | zai182636@web-library.net
 [2026-07-06 20:14:47] SELECTED | zai178089@web-library.net | smart rotation (low pressure + usage)
 [2026-07-06 20:16:14] VALIDATED | zai178089@web-library.net
+[2026-07-06 21:03:13] ACCOUNT_CREATED | zai882234@guerrillamailblock.com | proxy=no
+[2026-07-06 21:13:27] ACCOUNT_CREATED | zai137246@web-library.net | proxy=no
