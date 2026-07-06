@@ -12,3 +12,27 @@
 [2026-07-06 20:16:14] VALIDATED | zai178089@web-library.net
 [2026-07-06 21:03:13] ACCOUNT_CREATED | zai882234@guerrillamailblock.com | proxy=no
 [2026-07-06 21:13:27] ACCOUNT_CREATED | zai137246@web-library.net | proxy=no
+[2026-07-06 21:20:11] VALIDATED | zai178089@web-library.net
+[2026-07-06 21:20:41] VALIDATED | zai182636@web-library.net
+[2026-07-06 21:21:06] VALIDATED | zai882234@guerrillamailblock.com
+[2026-07-06 21:21:39] VALIDATED | zai137246@web-library.net
+[2026-07-06 21:24:09] ACCOUNT_CREATED | zai981808@web-library.net | proxy=no
+[2026-07-06 21:26:42] VALIDATED | zai981808@web-library.net
+[2026-07-06 21:29:43] SELECTED | zai882234@guerrillamailblock.com | smart rotation (low pressure + usage)
+[2026-07-06 21:30:13] VALIDATED | zai882234@guerrillamailblock.com
+[2026-07-06 21:31:37] VALIDATED | zai882234@guerrillamailblock.com
+[2026-07-06 21:32:07] MARKED_EXHAUSTED | zai882234@guerrillamailblock.com | ZCode reported 0% quota (45m cooldown, n=1)
+[2026-07-06 21:32:15] SELECTED | zai137246@web-library.net | smart rotation (low pressure + usage)
+[2026-07-06 21:32:49] VALIDATED | zai137246@web-library.net
+[2026-07-06 21:36:21] SELECTED | zai981808@web-library.net | smart rotation (low pressure + usage)
+[2026-07-06 21:36:54] VALIDATED | zai981808@web-library.net
+[2026-07-06 21:43:36] SELECTED | zai137246@web-library.net | smart rotation (low pressure + usage)
+[2026-07-06 21:44:10] VALIDATED | zai137246@web-library.net
+[2026-07-06 21:48:35] SELECTED | zai981808@web-library.net | smart rotation (low pressure + usage)
+[2026-07-06 21:49:06] VALIDATED | zai981808@web-library.net
+[2026-07-06 21:49:59] SELECTED | zai178089@web-library.net | smart rotation (low pressure + usage)
+[2026-07-06 21:50:32] VALIDATED | zai178089@web-library.net
+[2026-07-06 21:54:28] MARKED_EXHAUSTED | zai178089@web-library.net | Old account quota exhausted (45m cooldown, n=1)
+[2026-07-06 21:54:28] MARKED_EXHAUSTED | zai182636@web-library.net | Old account quota exhausted (45m cooldown, n=1)
+[2026-07-06 21:54:40] SELECTED | zai137246@web-library.net | smart rotation (low pressure + usage)
+[2026-07-06 21:55:13] VALIDATED | zai137246@web-library.net

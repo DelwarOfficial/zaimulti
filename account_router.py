@@ -419,15 +419,18 @@ def _sync_token_to_zcode(account: Dict[str, Any]) -> None:
 
         updated = False
         providers = data.get("provider", {})
-        for p_name in ["builtin:zai-start-plan", "builtin:zai-coding-plan"]:
+        for p_name in ["builtin:zai-start-plan", "builtin:zai-coding-plan", "builtin:zai"]:
             if p_name in providers:
                 providers[p_name].setdefault("options", {})["apiKey"] = token_val
+                providers[p_name]["enabled"] = True
+                if p_name == "builtin:zai":
+                    providers[p_name]["options"]["baseURL"] = "https://zcode.z.ai/api/v1/zcode-plan/anthropic"
                 updated = True
 
         if updated:
             with open(config_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
-            console.print(f"[dim][ZCode] Automatically synced token for {account['email']} to ZCode config.json[/dim]")
+            console.print(f"[dim][ZCode] Automatically synced token for {account['email']} to ZCode config.json (API Key enabled)[/dim]")
     except Exception as exc:
         log.warning(f"Failed to sync token to ZCode config.json: {exc}")
 
@@ -467,21 +470,20 @@ def _mark_validation_failure(email: str) -> None:
     """
     Best-effort classification of a failed validation.
 
-    We re-open the account record to inspect the most recent stored
-    failure reason if present; otherwise default to 'exhausted' (safer than
-    invalid, which would burn the account for longer).
+    If it is invalid (permanently dead), we delete it from the pool.
+    If exhausted (temporary rate limit), we put it on cooldown.
     """
     data = load_accounts()
-    for acc in data.get("accounts", []):
+    accounts = data.get("accounts", [])
+    for idx, acc in enumerate(accounts):
         if acc.get("email") != email:
             continue
         reason = (acc.get("last_failure_reason") or "").lower()
         if any(k in reason for k in config.invalid_session_keywords()):
-            acc["status"] = "invalid"
-            acc["cooldown_until"] = (
-                datetime.now() + timedelta(minutes=int(config.get("invalid_cooldown_min", 15)))
-            ).isoformat()
-            log_event(email, "MARKED_INVALID", "validation failure (auth signals)")
+            accounts.pop(idx)
+            save_accounts(data)
+            log_event(email, "DELETED_INVALID", f"validation failure: {reason}")
+            console.print(f"[bold red]Permanently deleted invalid account: {email}[/bold red]")
         else:
             acc["status"] = "exhausted"
             acc["exhausted_at"] = datetime.now().isoformat()
@@ -489,7 +491,7 @@ def _mark_validation_failure(email: str) -> None:
                 datetime.now() + timedelta(minutes=int(config.get("exhausted_cooldown_min", 45)))
             ).isoformat()
             log_event(email, "MARKED_EXHAUSTED", "validation failed")
-        save_accounts(data)
+            save_accounts(data)
         return
 
 
@@ -610,19 +612,15 @@ def mark_exhausted(
 
 
 def mark_invalid(email: str, reason: str = "session invalid") -> None:
-    """Mark account as bad (dead cookies, banned, auth failure)."""
+    """Delete the bad account (dead cookies, banned, auth failure) from the pool."""
     data = load_accounts()
-    for acc in data.get("accounts", []):
-        if acc.get("email") != email:
-            continue
-        acc["status"] = "invalid"
-        acc["cooldown_until"] = (
-            datetime.now() + timedelta(minutes=int(config.get("invalid_cooldown_min", 15)))
-        ).isoformat()
-        acc["last_failure_reason"] = reason
+    accounts = data.get("accounts", [])
+    filtered_accounts = [acc for acc in accounts if acc.get("email") != email]
+    if len(accounts) != len(filtered_accounts):
+        data["accounts"] = filtered_accounts
         save_accounts(data)
-        log_event(email, "MARKED_INVALID", reason)
-        console.print(f"[red]Marked {email} as invalid ({reason})[/red]")
+        log_event(email, "DELETED_INVALID", reason)
+        console.print(f"[bold red]Permanently deleted invalid account: {email} ({reason})[/bold red]")
         return
     console.print(f"[red]mark_invalid: account not found: {email}[/red]")
 

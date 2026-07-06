@@ -4,7 +4,7 @@
       "email": "zai178089@web-library.net",
       "password": "Zai532063!p49",
       "created_at": "2026-07-05T19:53:55.137966",
-      "status": "active",
+      "status": "exhausted",
       "cookies": [
         {
           "name": "cdn_sec_tc",
@@ -118,18 +118,19 @@
         "device_scale_factor": 1.15
       },
       "proxy": null,
-      "last_used": "2026-07-06T20:14:47.106246",
-      "usage_count": 2,
+      "last_used": "2026-07-06T21:49:59.297738",
+      "usage_count": 3,
       "request_count": 0,
-      "exhausted_at": null,
-      "cooldown_until": null,
-      "last_failure_reason": null
+      "exhausted_at": "2026-07-06T21:54:28.112051",
+      "cooldown_until": "2026-07-06T22:39:28.112051",
+      "last_failure_reason": "Old account quota exhausted",
+      "exhausted_count": 1
     },
     {
       "email": "zai182636@web-library.net",
       "password": "Zai965138!q30",
       "created_at": "2026-07-05T19:59:58.793453",
-      "status": "active",
+      "status": "exhausted",
       "cookies": [
         {
           "name": "cdn_sec_tc",
@@ -246,16 +247,17 @@
       "last_used": "2026-07-06T17:47:33.109551",
       "usage_count": 1,
       "request_count": 1,
-      "exhausted_at": null,
-      "cooldown_until": null,
-      "last_failure_reason": null,
-      "approx_tokens": 38
+      "exhausted_at": "2026-07-06T21:54:28.127021",
+      "cooldown_until": "2026-07-06T22:39:28.127021",
+      "last_failure_reason": "Old account quota exhausted",
+      "approx_tokens": 38,
+      "exhausted_count": 1
     },
     {
       "email": "zai882234@guerrillamailblock.com",
       "password": "Zai708184!q94",
       "created_at": "2026-07-06T21:03:13.907917",
-      "status": "active",
+      "status": "exhausted",
       "cookies": [
         {
           "name": "cdn_sec_tc",
@@ -369,14 +371,14 @@
         "device_scale_factor": 1.09
       },
       "proxy": null,
-      "last_used": null,
-      "usage_count": 0,
+      "last_used": "2026-07-06T21:29:43.056908",
+      "usage_count": 1,
       "request_count": 0,
       "approx_tokens": 0,
-      "exhausted_at": null,
-      "exhausted_count": 0,
-      "cooldown_until": null,
-      "last_failure_reason": null
+      "exhausted_at": "2026-07-06T21:32:07.254990",
+      "exhausted_count": 1,
+      "cooldown_until": "2026-07-06T22:17:07.254990",
+      "last_failure_reason": "ZCode reported 0% quota"
     },
     {
       "email": "zai137246@web-library.net",
@@ -566,8 +568,135 @@
         "device_scale_factor": 1.23
       },
       "proxy": null,
-      "last_used": null,
-      "usage_count": 0,
+      "last_used": "2026-07-06T21:54:40.843486",
+      "usage_count": 3,
+      "request_count": 0,
+      "approx_tokens": 0,
+      "exhausted_at": null,
+      "exhausted_count": 0,
+      "cooldown_until": null,
+      "last_failure_reason": null
+    },
+    {
+      "email": "zai981808@web-library.net",
+      "password": "Zai599665!r42",
+      "created_at": "2026-07-06T21:24:09.965596",
+      "status": "active",
+      "cookies": [
+        {
+          "name": "cdn_sec_tc",
+          "value": "a3b5c99b17833512927946514e1f7dc254a24722654e22c6c95d4167fe",
+          "domain": "chat.z.ai",
+          "path": "/",
+          "expires": 1783354892.281365,
+          "httpOnly": true,
+          "secure": false,
+          "sameSite": "Lax"
+        },
+        {
+          "name": "acw_tc",
+          "value": "0a0ccb5817833512927897141e59bebc868b3cd5861f5cd139728a0d9d844b",
+          "domain": "chat.z.ai",
+          "path": "/",
+          "expires": 1783353092.281449,
+          "httpOnly": true,
+          "secure": false,
+          "sameSite": "Lax"
+        },
+        {
+          "name": "_gcl_au",
+          "value": "1.1.773064570.1783351293",
+          "domain": ".z.ai",
+          "path": "/",
+          "expires": 1791127292,
+          "httpOnly": false,
+          "secure": false,
+          "sameSite": "Lax"
+        },
+        {
+          "name": "_ga",
+          "value": "GA1.1.1366807119.1783351293",
+          "domain": ".z.ai",
+          "path": "/",
+          "expires": 1817911444.191051,
+          "httpOnly": false,
+          "secure": false,
+          "sameSite": "Lax"
+        },
+        {
+          "name": "_c_WBKFRo",
+          "value": "2VVRrSNNUsvdGD67EKkSH17mkct2hFJBQnPgxeSa",
+          "domain": ".z.ai",
+          "path": "/",
+          "expires": 1814887300,
+          "httpOnly": false,
+          "secure": false,
+          "sameSite": "Lax"
+        },
+        {
+          "name": "_nb_ioWEgULi",
+          "value": "",
+          "domain": ".z.ai",
+          "path": "/",
+          "expires": -1,
+          "httpOnly": false,
+          "secure": false,
+          "sameSite": "Lax"
+        },
+        {
+          "name": "_ga_Z8QTHYBHP3",
+          "value": "GS2.1.s1783351292$o1$g1$t1783351444$j57$l0$h0",
+          "domain": ".z.ai",
+          "path": "/",
+          "expires": 1817911444.246876,
+          "httpOnly": false,
+          "secure": false,
+          "sameSite": "Lax"
+        },
+        {
+          "name": "token",
+          "value": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUyZmFhMjBlLWExM2MtNDMyZi05ZTU4LTg5YWQyMjA3ZDkxNSIsImVtYWlsIjoiZ3Vlc3QtMTc4MzM1MTI5NDY5OUBndWVzdC5jb20ifQ.7nWsouIwA6Acng2fXi4rMennUzaj1eBcdKBaDj6lvyihPEDpVm-LHJ4hgG2sfniogK7gbDZoqKo0o0hDMHmGhw",
+          "domain": "chat.z.ai",
+          "path": "/",
+          "expires": -1,
+          "httpOnly": true,
+          "secure": true,
+          "sameSite": "Lax"
+        },
+        {
+          "name": "ssxmod_itna",
+          "value": "1-QqmxnDyQKmq4cGDhx_hxQkD0xDukD7uP07DzxC5iOD_xQ5DODLxn4xGdq9W8XpWY8KQBxPqKo0hTE5/D05PIEDB9QDqxYAbuDEm4YezGbgoxeQABwxh2WBDS2Tcj1qXZTt2oQB/MBqilWkB=BbpD0aDmIWPBqxpDibbxD1EDDkDDRwDY5_6CoDNxDCTx0rD0npDWmWDCI_EnWmW_Omw7To5nnxpAex8jnTqjqqK0rYKWb2N0hKGxKTPaKPeD_KVBqX7LeDip6b3rQRm40kwu8pEmEW9FRXWQ9G=rBsWMrcIhLNDoerK205QgxQGxGYxeBxtfHQAepDemrqvhGqGxMroYq=1x=uDwlbDD",
+          "domain": ".z.ai",
+          "path": "/",
+          "expires": 1783353249,
+          "httpOnly": false,
+          "secure": false,
+          "sameSite": "Lax"
+        },
+        {
+          "name": "ssxmod_itna2",
+          "value": "1-QqmxnDyQKmq4cGDhx_hxQkD0xDukD7uP07DzxC5iOD_xQ5DODLxn4xGdq9W8XpWY8KQBxPqKo0hTE5pDDaopid=aOcbelxWYrwQ/0n87xD",
+          "domain": ".z.ai",
+          "path": "/",
+          "expires": 1783353249,
+          "httpOnly": false,
+          "secure": false,
+          "sameSite": "Lax"
+        }
+      ],
+      "fingerprint": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0",
+        "viewport": {
+          "width": 1921,
+          "height": 1065
+        },
+        "locale": "en-CA",
+        "timezone_id": "Europe/London",
+        "device_scale_factor": 1.08
+      },
+      "proxy": null,
+      "last_used": "2026-07-06T21:48:35.385063",
+      "usage_count": 2,
       "request_count": 0,
       "approx_tokens": 0,
       "exhausted_at": null,
@@ -576,5 +705,5 @@
       "last_failure_reason": null
     }
   ],
-  "last_updated": "2026-07-06T21:13:27.231297"
+  "last_updated": "2026-07-06T21:54:40.843486"
 }
