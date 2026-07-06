@@ -155,18 +155,35 @@ def _submit_signup_form(page: Page, email: str, password: str) -> None:
         _wait_with_fallback(page, 15, "Waiting 15s for manual email-option click...")
     human_delay(1.5, 3.0)
 
+    # Wait for the email input to ensure the form loaded
+    try:
+        page.wait_for_selector('input[type="email"], input[placeholder*="email" i]', timeout=15000)
+    except Exception:
+        pass
+
     # Click the "Sign up" toggle if the form defaults to "Sign in" mode
     try:
-        # Check if the "Forgot Password?" button/link is present, indicating Sign In page
-        forgot_pw = page.locator('text="Forgot Password?", button:has-text("Forgot Password?"), a:has-text("Forgot Password?")').first
-        if forgot_pw.count() > 0 and forgot_pw.is_visible():
-            signup_toggle = page.locator('a:has-text("Sign up"), span:has-text("Sign up"), button:has-text("Sign up")').first
-            if signup_toggle.count() > 0 and signup_toggle.is_visible():
+        # Check if the page has a "Sign up" link/span
+        signup_toggle = page.locator('a:has-text("Sign up"), span:has-text("Sign up"), button:has-text("Sign up")').first
+        if signup_toggle.count() > 0 and signup_toggle.is_visible():
+            # If "Already have an account?" is not on the page, we are in Sign In mode
+            already_have = page.locator('text="Already have an account?"').first
+            if already_have.count() == 0 or not already_have.is_visible():
                 console.print("[cyan]Page defaults to Sign In. Clicking 'Sign up' link...[/cyan]")
                 signup_toggle.click()
-                human_delay(1.5, 3.0)
+                human_delay(2.0, 3.5)
     except Exception as e:
         console.print(f"[dim]Toggle to signup failed: {e}[/dim]")
+
+    # If there is a Name field (Open WebUI Sign Up form requires it), fill it!
+    try:
+        name_loc = page.locator('input[placeholder*="name" i], input[type="text"]').first
+        if name_loc.count() > 0 and name_loc.is_visible():
+            name_val = email.split('@')[0]
+            name_loc.fill(name_val)
+            human_delay(0.6, 1.4)
+    except Exception as e:
+        console.print(f"[dim]Name field fill skipped: {e}[/dim]")
 
     # 2. Fill email.
     if not selectors.fill_email(page, email, timeout=10000):
