@@ -155,6 +155,19 @@ def _submit_signup_form(page: Page, email: str, password: str) -> None:
         _wait_with_fallback(page, 15, "Waiting 15s for manual email-option click...")
     human_delay(1.5, 3.0)
 
+    # Click the "Sign up" toggle if the form defaults to "Sign in" mode
+    try:
+        # Check if the "Forgot Password?" button/link is present, indicating Sign In page
+        forgot_pw = page.locator('text="Forgot Password?", button:has-text("Forgot Password?"), a:has-text("Forgot Password?")').first
+        if forgot_pw.count() > 0 and forgot_pw.is_visible():
+            signup_toggle = page.locator('a:has-text("Sign up"), span:has-text("Sign up"), button:has-text("Sign up")').first
+            if signup_toggle.count() > 0 and signup_toggle.is_visible():
+                console.print("[cyan]Page defaults to Sign In. Clicking 'Sign up' link...[/cyan]")
+                signup_toggle.click()
+                human_delay(1.5, 3.0)
+    except Exception as e:
+        console.print(f"[dim]Toggle to signup failed: {e}[/dim]")
+
     # 2. Fill email.
     if not selectors.fill_email(page, email, timeout=10000):
         console.print(
