@@ -118,8 +118,8 @@
         "device_scale_factor": 1.15
       },
       "proxy": null,
-      "last_used": "2026-07-06T17:20:37.670355",
-      "usage_count": 1,
+      "last_used": "2026-07-06T20:14:47.106246",
+      "usage_count": 2,
       "request_count": 0,
       "exhausted_at": null,
       "cooldown_until": null,
@@ -252,5 +252,5 @@
       "approx_tokens": 38
     }
   ],
-  "last_updated": "2026-07-06T17:50:30.516978"
+  "last_updated": "2026-07-06T20:14:47.106246"
 }

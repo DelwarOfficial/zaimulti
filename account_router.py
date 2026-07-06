@@ -397,6 +397,41 @@ def validate_session(
                 pass
 
 
+def _sync_token_to_zcode(account: Dict[str, Any]) -> None:
+    """Extract JWT token from cookies and update ZCode config.json automatically."""
+    cookies = account.get("cookies", []) or []
+    token_val = None
+    for cookie in cookies:
+        if cookie.get("name") == "token":
+            token_val = cookie.get("value")
+            break
+
+    if not token_val:
+        return
+
+    config_path = Path("C:/Users/Admin/.zcode/v2/config.json")
+    if not config_path.exists():
+        return
+
+    try:
+        with open(config_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        updated = False
+        providers = data.get("provider", {})
+        for p_name in ["builtin:zai-start-plan", "builtin:zai-coding-plan"]:
+            if p_name in providers:
+                providers[p_name].setdefault("options", {})["apiKey"] = token_val
+                updated = True
+
+        if updated:
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            console.print(f"[dim][ZCode] Automatically synced token for {account['email']} to ZCode config.json[/dim]")
+    except Exception as exc:
+        log.warning(f"Failed to sync token to ZCode config.json: {exc}")
+
+
 # ------------------------------------------------------------
 # Public session entry points
 # ------------------------------------------------------------
@@ -417,6 +452,7 @@ def get_valid_session(deep_check: bool = True) -> Optional[Dict[str, Any]]:
         console.print(f"[cyan]Validating session: {account['email']}[/cyan]")
         if validate_session(account, deep_check=deep_check):
             console.print(f"[bold green][OK] Valid session ready: {account['email']}[/bold green]")
+            _sync_token_to_zcode(account)
             return account
 
         # Decide status from the failure: invalid vs exhausted.
