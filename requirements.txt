@@ -1,0 +1,20 @@
+# Core automation
+playwright==1.52.0
+playwright-stealth==2.0.3
+
+# HTTP / temp-mail providers
+requests==2.32.3
+
+# Fingerprinting + env
+fake-useragent==1.5.1
+python-dotenv==1.0.1
+
+# Rich console output (logging + tables)
+rich==13.9.4
+
+# Optional but recommended: at-rest encryption for accounts.json.
+# If absent, the project falls back to plaintext automatically.
+cryptography>=42.0.0
+
+# Optional for advanced red teaming / future LLM judge:
+# openai>=1.0.0

@@ -1,0 +1,36 @@
+{
+  "_comment": "Optional override file. Delete keys you don't customize; values missing here fall back to defaults in config.py. Env vars ZAI_<KEY> take precedence over this file.",
+
+  "accounts_file": "accounts/accounts.json",
+  "logs_dir": "logs",
+  "data_dir": "data",
+
+  "exhausted_cooldown_min": 45,
+  "invalid_cooldown_min": 15,
+  "cooling_down_min": 5,
+
+  "soft_skip_recent_used_sec": 30,
+  "max_validation_attempts": 6,
+
+  "chars_per_token_estimate": 4.0,
+  "soft_token_budget_per_account": 200000,
+
+  "temp_mail_providers": ["mail.tm", "guerrillamail", "1secmail"],
+  "temp_mail_timeout_sec": 240,
+  "temp_mail_poll_interval_sec": 5,
+  "temp_mail_max_retries_per_provider": 2,
+
+  "create_headless": false,
+  "create_min_delay_sec": 1.2,
+  "create_max_delay_sec": 3.8,
+
+  "deep_validation_enabled": true,
+  "deep_validation_test_prompt": "ping",
+  "deep_validation_timeout_sec": 30,
+
+  "encrypt_at_rest": false,
+  "encryption_key_env_var": "ZAI_STORAGE_KEY",
+
+  "structured_logging": true,
+  "log_level": "INFO"
+}
