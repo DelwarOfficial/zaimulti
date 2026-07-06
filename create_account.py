@@ -161,19 +161,25 @@ def _submit_signup_form(page: Page, email: str, password: str) -> None:
     except Exception:
         pass
 
-    # Click the "Sign up" toggle if the form defaults to "Sign in" mode
+    # Click the "Sign up" toggle if the form defaults to "Sign in" mode (using robust JS click)
     try:
-        # Check if the page has a "Sign up" link/span
-        signup_toggle = page.locator('a:has-text("Sign up"), span:has-text("Sign up"), button:has-text("Sign up")').first
-        if signup_toggle.count() > 0 and signup_toggle.is_visible():
-            # If "Already have an account?" is not on the page, we are in Sign In mode
-            already_have = page.locator('text="Already have an account?"').first
-            if already_have.count() == 0 or not already_have.is_visible():
-                console.print("[cyan]Page defaults to Sign In. Clicking 'Sign up' link...[/cyan]")
-                signup_toggle.click()
-                human_delay(2.0, 3.5)
+        console.print("[cyan]Checking page mode (Sign In vs Sign Up)...[/cyan]")
+        toggled = page.evaluate('''() => {
+            const alreadyHave = Array.from(document.querySelectorAll("span, a, p, div")).find(el => el.innerText.includes("Already have an account?"));
+            if (!alreadyHave) {
+                const signUpLink = Array.from(document.querySelectorAll("span, a, button")).find(el => el.innerText.includes("Sign up"));
+                if (signUpLink) {
+                    signUpLink.click();
+                    return true;
+                }
+            }
+            return false;
+        }''')
+        if toggled:
+            console.print("[cyan]Page defaulted to Sign In. Clicked 'Sign up' link via JS successfully.[/cyan]")
+            human_delay(2.0, 3.5)
     except Exception as e:
-        console.print(f"[dim]Toggle to signup failed: {e}[/dim]")
+        console.print(f"[dim]JS toggle to signup failed: {e}[/dim]")
 
     # If there is a Name field (Open WebUI Sign Up form requires it), fill it!
     try:
@@ -279,9 +285,21 @@ def create_zai_account(
             # 2-4. Drive the form.
             _submit_signup_form(page, email, password)
 
-            console.print("[cyan]Form submitted. Waiting for verification email...[/cyan]")
+            # 5. Check for immediate Captcha / Security verification after form submit
+            human_delay(2.5, 4.0)
+            if _detect_slider_or_captcha(page) or page.locator('text="Click to start verification"').count() > 0:
+                # If page already navigated to the verification email page, skip captcha warning
+                if page.locator('text="Verify Your Email", text="sent a verification link"').count() == 0:
+                    console.print("[bold yellow]!!! Security verification / Captcha detected !!![/bold yellow]")
+                    console.print("[yellow]Please solve the verification/captcha manually in the browser window now.[/yellow]")
+                    # Play a beep or wait for the user to complete it
+                    _wait_with_fallback(
+                        page,
+                        int(config.get("create_wait_slider_sec", 35)),
+                        "Waiting 35 seconds for manual captcha/verification solve...",
+                    )
 
-            # 5. Wait for the verification link, with provider fallback.
+            # 6. Wait for the verification link, with provider fallback.
             verify_link = _wait_for_verification_with_fallback(
                 page, temp_mail, email, password,
             )
@@ -302,14 +320,14 @@ def create_zai_account(
             except Exception:
                 pass
 
-            # 8. Slider / captcha pause if needed.
+            # 8. (Pre-verification captcha handled above. Keeping fallback in case of login captcha)
             if _detect_slider_or_captcha(page):
-                console.print("[bold yellow]!!! Security slider / captcha detected !!![/bold yellow]")
+                console.print("[bold yellow]!!! Security slider / captcha detected during login !!![/bold yellow]")
                 console.print("[yellow]Solve it manually in the visible browser.[/yellow]")
                 _wait_with_fallback(
                     page,
                     int(config.get("create_wait_slider_sec", 30)),
-                    "Waiting for manual slider solve...",
+                    "Waiting for manual login captcha solve...",
                 )
 
             # 9. Auto-detect login completion.
