@@ -340,7 +340,7 @@ def validate_session(
             # Phase A: passive content scan.
             try:
                 page.wait_for_timeout(1500)
-                content = page.content() or ""
+                content = page.locator("body").inner_text() or ""
                 signals = detect_exhaustion(content)
                 if signals["is_invalid"]:
                     log_event(email, "VALIDATE_FAIL", "invalid signals: " + ",".join(signals["matched"]), level=30)

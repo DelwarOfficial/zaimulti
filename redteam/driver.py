@@ -228,7 +228,7 @@ def _capture_response(page: Any, max_wait_seconds: int = 0) -> str:
     if not text:
         # No assistant text at all - check for inline error / rate signals.
         try:
-            body = page.content() or ""
+            body = page.locator("body").inner_text() or ""
         except Exception:
             body = ""
         if body:

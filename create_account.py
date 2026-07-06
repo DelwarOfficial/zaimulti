@@ -65,7 +65,7 @@ def _detect_slider_or_captcha(page: Page) -> bool:
         "human", "drag the", "slide to", "puzzle",
     ]
     try:
-        content = (page.content() or "").lower()
+        content = (page.locator("body").inner_text() or "").lower()
         if any(t in content for t in texts):
             return True
     except Exception:

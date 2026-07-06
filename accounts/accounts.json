@@ -118,11 +118,12 @@
         "device_scale_factor": 1.15
       },
       "proxy": null,
-      "last_used": null,
-      "usage_count": 0,
+      "last_used": "2026-07-06T17:20:37.670355",
+      "usage_count": 1,
       "request_count": 0,
       "exhausted_at": null,
-      "cooldown_until": null
+      "cooldown_until": null,
+      "last_failure_reason": null
     },
     {
       "email": "zai182636@web-library.net",
@@ -246,8 +247,9 @@
       "usage_count": 0,
       "request_count": 0,
       "exhausted_at": null,
-      "cooldown_until": null
+      "cooldown_until": null,
+      "last_failure_reason": null
     }
   ],
-  "last_updated": "2026-07-05T19:59:58.793453"
+  "last_updated": "2026-07-06T17:20:37.670355"
 }

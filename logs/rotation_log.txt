@@ -1,0 +1,7 @@
+[2026-07-06 17:00:46] VALIDATE_FAIL | zai178089@web-library.net | invalid signals: 429,403
+[2026-07-06 17:00:46] MARKED_EXHAUSTED | zai178089@web-library.net | validation failed
+[2026-07-06 17:00:51] VALIDATE_FAIL | zai182636@web-library.net | invalid signals: 429,403
+[2026-07-06 17:00:51] MARKED_EXHAUSTED | zai182636@web-library.net | validation failed
+[2026-07-06 17:06:08] VALIDATED | zai178089@web-library.net
+[2026-07-06 17:07:40] VALIDATED | zai182636@web-library.net
+[2026-07-06 17:20:37] SELECTED | zai178089@web-library.net | smart rotation (low pressure + usage)
