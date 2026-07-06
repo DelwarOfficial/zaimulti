@@ -305,7 +305,7 @@ def create_zai_account(
                 proxy=proxy_url,
             )
 
-            console.print(f"[bold green]✓ Account creation complete for {email}[/bold green]")
+            console.print(f"[bold green][OK] Account creation complete for {email}[/bold green]")
             browser.close()
             return email
 
@@ -400,7 +400,7 @@ def _persist_account(
     data["last_updated"] = datetime.now().isoformat()
     save_accounts(data)
     log_event(email, "ACCOUNT_CREATED", f"proxy={'yes' if proxy else 'no'}")
-    console.print(f"[bold green]✓ Account saved: {email}[/bold green]")
+    console.print(f"[bold green][OK] Account saved: {email}[/bold green]")
 
 
 def _persist_local(
@@ -439,7 +439,7 @@ def _persist_local(
     data["last_updated"] = datetime.now().isoformat()
     with open(accounts_file, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-    console.print(f"[bold green]✓ Account saved (local fallback): {email}[/bold green]")
+    console.print(f"[bold green][OK] Account saved (local fallback): {email}[/bold green]")
 
 
 # ============================================================

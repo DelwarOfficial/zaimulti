@@ -564,7 +564,7 @@ class TempMailManager:
                     self.provider = prov
                     self.active_provider = name
                     self.address = addr
-                    console.print(f"[green]✓ Mailbox ready on {name}: {addr}[/green]")
+                    console.print(f"[green][OK] Mailbox ready on {name}: {addr}[/green]")
                     return addr
                 except Exception as exc:
                     last_exc = exc
@@ -605,7 +605,7 @@ class TempMailManager:
                     raise NewMailboxAfterFallback(self.address)
 
                 link = prov.wait_for_verification_link()
-                console.print(f"[green]✓ Verification link found via {name}[/green]")
+                console.print(f"[green][OK] Verification link found via {name}[/green]")
                 return link
 
             except NewMailboxAfterFallback:

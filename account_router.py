@@ -416,7 +416,7 @@ def get_valid_session(deep_check: bool = True) -> Optional[Dict[str, Any]]:
 
         console.print(f"[cyan]Validating session: {account['email']}[/cyan]")
         if validate_session(account, deep_check=deep_check):
-            console.print(f"[bold green]✓ Valid session ready: {account['email']}[/bold green]")
+            console.print(f"[bold green][OK] Valid session ready: {account['email']}[/bold green]")
             return account
 
         # Decide status from the failure: invalid vs exhausted.
